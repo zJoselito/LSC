@@ -5,42 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Santos Custom - Facturación</title>
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
+
+    <!-- Font Awesome para iconos (opcional) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
+
+    <!-- CSS propio solo para tipografía estilo GTA V -->
     <link href="styles.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="min-vh-100 d-flex flex-column bg-light">
 
-    <div class="header-brand">
-        <div class="container-fluid d-flex justify-content-between align-items-center px-4">
-            <h1 class="mb-0 fs-5"><i class="fas fa-wrench me-2"></i>Los Santos Custom Button</h1>
-            <p class="mb-0 fs-5">Sistema de Facturación</p>
-        </div>
-    </div>
+    <!-- CABECERA -->
+    <header>
+        <nav class="navbar navbar-dark bg-dark mb-3">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1">
+                    <i class="fas fa-wrench me-2"></i>
+                    Los Santos Custom Button
+                </span>
+                <span class="text-light small">Sistema de Facturación</span>
+            </div>
+        </nav>
+    </header>
 
-    <div class="container-fluid px-4 vh-100">
-        <div class="row">
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="container-fluid py-3 flex-grow-1">
+        <div class="row g-3">
             <!-- Columna 1: Catálogo (Piezas y Servicios) -->
-            <div class="col-lg-4 mb-3">
+            <section class="col-12 col-lg-4">
                 <div class="d-flex align-items-center mb-2">
-                    <i class="fas fa-list text-theme-accent me-2"></i>
+                    <i class="fas fa-list text-secondary me-2"></i>
                     <h6 class="mb-0 fw-bold">Catálogo</h6>
                 </div>
 
-                <div id="catalog" class="catalog-scroll pe-1">
+                <div id="catalog" class="pe-1 overflow-auto" style="max-height: 65vh;">
                     <!-- Se llena dinámicamente con JS -->
                 </div>
-            </div>
+            </section>
 
             <!-- Columna 2: Factura Actual (Cantidades) -->
-            <div class="col-lg-5 mb-3">
+            <section class="col-12 col-md-7 col-lg-5">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <div class="d-flex align-items-center">
-                        <i class="fas fa-file-invoice text-theme-accent me-2"></i>
+                        <i class="fas fa-file-invoice text-secondary me-2"></i>
                         <h6 class="fw-bold mb-0">Factura Actual</h6>
                     </div>
                     <button class="btn btn-outline-danger btn-sm py-0 px-2" style="font-size: 0.75rem;"
@@ -49,9 +59,9 @@
                     </button>
                 </div>
 
-                <div class="card">
+                <div class="card h-100">
                     <div class="card-body p-0">
-                        <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                        <div class="table-responsive" style="max-height: 55vh; overflow-y: auto;">
                             <table class="table table-hover table-sm mb-0 align-middle">
                                 <thead class="table-light position-sticky top-0" style="z-index: 1;">
                                     <tr>
@@ -71,35 +81,35 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <!-- Columna 3: Precio Final (Resumen) -->
-            <div class="col-lg-3 mb-3">
+            <section class="col-12 col-md-5 col-lg-3">
                 <div class="d-flex align-items-center mb-2">
-                    <i class="fas fa-calculator text-theme-accent me-2"></i>
+                    <i class="fas fa-calculator text-secondary me-2"></i>
                     <h6 class="mb-0 fw-bold">Resumen</h6>
                 </div>
 
-                <div class="card summary-card">
-                    <div class="card-header py-2">
-                        <h6 class="mb-0 text-center text-white">Desglose Total</h6>
+                <div class="card border-primary">
+                    <div class="card-header py-2 bg-primary text-white">
+                        <h6 class="mb-0 text-center">Desglose Total</h6>
                     </div>
                     <div class="card-body p-2">
-                        <div class="summary-block">
-                            <div class="summary-row">
+                        <div class="mb-2">
+                            <div class="d-flex justify-content-between mb-1">
                                 <span class="text-muted">Coste Piezas/Servs:</span>
                                 <span id="sumPartsOther" class="fw-bold">$0</span>
                             </div>
-                            <div class="summary-row">
+                            <div class="d-flex justify-content-between mb-1">
                                 <span class="text-muted">Tarifa Mantenimiento:</span>
                                 <span id="sumBaseMant">$0</span>
                             </div>
-                            <div class="summary-row">
+                            <div class="d-flex justify-content-between mb-1">
                                 <span class="text-muted">Mano Obra Mant:</span>
                                 <span id="sumLaborMant">$0</span>
                             </div>
                             <hr class="my-2">
-                            <div class="summary-row align-items-center">
+                            <div class="d-flex justify-content-between align-items-center gap-2 mb-1">
                                 <span class="text-muted">Convenio (%):</span>
                                 <div class="input-group input-group-sm" style="width: 80px;">
                                     <input type="number" id="discountPercent" class="form-control text-end" value="0"
@@ -108,35 +118,41 @@
                                 </div>
                                 <span id="printDiscountPercent" class="d-none d-print-inline fw-bold">0%</span>
                             </div>
-                            <div id="rowDiscountAmount" class="summary-row d-none">
+                            <div id="rowDiscountAmount" class="d-flex justify-content-between d-none">
                                 <span class="text-danger">Descuento:</span>
                                 <span id="sumDiscount" class="text-danger">-$0</span>
                             </div>
                         </div>
 
-                        <div class="summary-total text-center">
-                            <div class="text-muted text-uppercase mb-1"
-                                style="font-size: 0.65rem; letter-spacing: 1px;">Precio Final</div>
-                            <span id="sumTotal" class="display-5 text-dark">$0</span>
+                        <div class="border-top pt-2 text-center">
+                            <div class="text-muted text-uppercase mb-1" style="font-size: 0.75rem; letter-spacing: 1px;">
+                                Precio Final
+                            </div>
+                            <span id="sumTotal" class="display-5">$0</span>
                         </div>
                     </div>
                 </div>
 
-                <button class="btn btn-custom-main w-100 mt-2 py-2" onclick="window.print()">
+                <button class="btn btn-primary w-100 mt-2 py-2" onclick="window.print()">
                     <i class="fas fa-print me-2"></i> Imprimir Factura
                 </button>
-            </div>
+            </section>
         </div>
-    </div>
+    </main>
 
-    <footer class="footer-custom text-center text-light py-3 mt-auto">
-        <div class="container">
-            <span class="footer-title">🔧 Facturacion</span>
+    <!-- PIE DE PÁGINA -->
+    <footer class="bg-dark text-center text-light py-3 mt-auto">
+        <div class="container small">
+            <span class="fw-semibold">🔧 Facturación</span>
             <br>
-            <small class="footer-sub"> Los Santos Customs | Realizado por <strong>@zjoselito</strong></small>
+            <span>Los Santos Customs | Realizado por <strong>@zjoselito</strong></span>
         </div>
     </footer>
 
+    <!-- Bootstrap JS (opcional, por si usas componentes interactivos) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Lógica de la aplicación -->
     <script src="script.js"></script>
 </body>
 

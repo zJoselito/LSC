@@ -37,9 +37,9 @@ function renderCatalog() {
         catDiv.className = 'card';
 
         const buttonsHTML = catItems.map(item => `
-            <button class="btn btn-custom-action mb-1 me-1" onclick="addToCart('${item.id}')">
-                <i class="fas fa-plus me-1 text-muted"></i>${item.name}
-                <span class="fw-bold text-dark ms-1">+$${item.price}</span>
+            <button class="btn btn-outline-secondary btn-sm mb-1 me-1" onclick="addToCart('${item.id}')">
+                <i class="fas fa-plus me-1"></i>${item.name}
+                <span class="fw-semibold ms-1">+$${item.price}</span>
             </button>
         `).join('');
 
@@ -146,16 +146,16 @@ function updateCartUI() {
         let badge = '';
 
         if (item.type === 'mantenimiento')
-            badge = '<span class="badge badge-type badge-mantenimiento">Mant.</span>';
+            badge = '<span class="badge bg-info text-dark">Mant.</span>';
 
         else if (item.type === 'pieza')
-            badge = '<span class="badge badge-type badge-pieza">Pieza</span>';
+            badge = '<span class="badge bg-secondary">Pieza</span>';
 
         else if (item.type === 'servicio')
-            badge = '<span class="badge badge-type badge-servicio">Servicio</span>';
+            badge = '<span class="badge bg-success">Servicio</span>';
 
         else if (item.type === 'tuneo')
-            badge = '<span class="badge badge-type badge-tuneo">Tuneo</span>';
+            badge = '<span class="badge bg-primary">Tuneo</span>';
 
         let subtotalParts = item.price * item.quantity;
 
@@ -174,15 +174,20 @@ function updateCartUI() {
             </td>
 
             <td>
-                <div class="item-quantity mx-auto">
-                    <button class="btn text-secondary" onclick="changeQuantity(${index}, -1)">
-                        <i class="fas fa-minus" style="font-size: 0.6rem;"></i>
+                <div class="input-group input-group-sm flex-nowrap" style="max-width: 160px;">
+                    <button class="btn btn-outline-secondary" type="button" onclick="changeQuantity(${index}, -1)">
+                        <i class="fas fa-minus"></i>
                     </button>
-
-                    <input type="number" value="${item.quantity}" readonly>
-
-                    <button class="btn text-secondary" onclick="changeQuantity(${index}, 1)">
-                        <i class="fas fa-plus" style="font-size: 0.6rem;"></i>
+                    <input
+                        type="number"
+                        class="form-control text-center"
+                        value="${item.quantity}"
+                        readonly
+                        aria-label="Cantidad"
+                        style="max-width: 64px; flex: 0 0 64px;"
+                    >
+                    <button class="btn btn-outline-secondary" type="button" onclick="changeQuantity(${index}, 1)">
+                        <i class="fas fa-plus"></i>
                     </button>
                 </div>
             </td>
