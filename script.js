@@ -15,10 +15,10 @@ const itemsDB = [
     { id: 's_asistencia', name: 'Asistencia en Carretera (Base 300)', price: 300, type: 'servicio', category: 'Servicios de Asistencia' },
 
     // === Tuneos ===
-    { id: 't_mo_azul', name: 'Mano Obra (Coche Azul)', price: 150, type: 'tuneo', category: 'Tuneos (Mano Obra por Pieza)' },
-    { id: 't_mo_verde', name: 'Mano Obra (Coche Verde)', price: 175, type: 'tuneo', category: 'Tuneos (Mano Obra por Pieza)' },
-    { id: 't_mo_morado', name: 'Mano Obra (Coche Morado)', price: 200, type: 'tuneo', category: 'Tuneos (Mano Obra por Pieza)' },
-    { id: 't_mo_amarillo', name: 'Mano Obra (Coche Amarillo)', price: 225, type: 'tuneo', category: 'Tuneos (Mano Obra por Pieza)' }
+    { id: 't_mo_azul', name: 'Mano Obra (Coche Azul)', price: 50, type: 'tuneo', category: 'Tuneos (Mano Obra por Pieza)' },
+    { id: 't_mo_verde', name: 'Mano Obra (Coche Verde)', price: 80, type: 'tuneo', category: 'Tuneos (Mano Obra por Pieza)' },
+    { id: 't_mo_morado', name: 'Mano Obra (Coche Morado)', price: 100, type: 'tuneo', category: 'Tuneos (Mano Obra por Pieza)' },
+    { id: 't_mo_amarillo', name: 'Mano Obra (Coche Amarillo)', price: 125, type: 'tuneo', category: 'Tuneos (Mano Obra por Pieza)' }
 ];
 
 let cart = [];
@@ -227,7 +227,7 @@ function calculateTotals() {
             subtotalPiezasOtros += itemTotal;
 
             // Mano de obra
-            laborMantenimiento += 150 * item.quantity;
+            laborMantenimiento += 75 * item.quantity;
 
             if (item.type === 'mantenimiento') {
                 qtyElementosMantenimiento += item.quantity;
@@ -247,7 +247,7 @@ function calculateTotals() {
 
     // Base solo una vez si hay mantenimiento o piezas
     const baseMantenimiento =
-        (qtyElementosMantenimiento > 0 || qtyElementosPieza > 0) ? 100 : 0;
+        (qtyElementosMantenimiento > 0 || qtyElementosPieza > 0) ? 50 : 0;
 
     let subtotalBeforeDiscount =
         subtotalPiezasOtros +
